@@ -9,6 +9,7 @@
 ## Usage
 
 ```python
+import asyncio
 import cacher
 import time
 
@@ -23,7 +24,7 @@ def expensive_function(x):
 @cacher.async_lru_cache
 async def expensive_async_function(x):
     print("processing function")
-    time.sleep(1)
+    await asyncio.sleep(1)
     return x * x
 
 
