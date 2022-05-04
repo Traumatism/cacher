@@ -1,12 +1,12 @@
 import functools
 
-from typing import Callable, ParamSpec, TypeVar, Dict
+from typing import Callable, TypeVar, ParamSpec, Dict
 
 T = TypeVar("T")
 P = ParamSpec("P")
 
 
-def generate_wrapper(func: Callable[P, T], size=128) -> Callable[P, T]:
+def generate_wrapper(size: int, func: Callable[P, T]) -> Callable[P, T]:
     """Generate wrapper"""
 
     cache: Dict[int, T] = {}

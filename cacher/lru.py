@@ -27,12 +27,13 @@ def lru_cache(
     """LRU cache decorator"""
 
     if not isinstance(size, int):
-        function = size
-        return generate_wrapper(function)
+        return generate_wrapper(128, size)
 
-    if size < 1 and size != -1:
+    _size: int = size
+
+    if _size < 1 and _size != -1:
         raise ValueError(
             "Cache size must be greater than 0 (use -1 for infinite cache)"
         )
 
-    return lambda func: (generate_wrapper(func, size))
+    return lambda func: (generate_wrapper(_size, func))
