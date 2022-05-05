@@ -1,5 +1,3 @@
-import functools
-
 from typing import Callable, TypeVar, ParamSpec, Dict
 
 T = TypeVar("T")
@@ -11,7 +9,6 @@ def generate_wrapper(size: int, func: Callable[P, T]) -> Callable[P, T]:
 
     cache: Dict[int, T] = {}
 
-    @functools.wraps(func)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
         key = hash((args, frozenset(kwargs.items())))  # type: ignore
 
@@ -22,6 +19,7 @@ def generate_wrapper(size: int, func: Callable[P, T]) -> Callable[P, T]:
             cache.pop(next(iter(cache)))
 
         r = func(*args, **kwargs)
+
         cache[key] = r
 
         return r
