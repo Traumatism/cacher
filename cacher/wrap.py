@@ -18,10 +18,7 @@ def generate_wrapper(size: int, func: Callable[P, T]) -> Callable[P, T]:
         if len(cache) == size and size != -1:
             cache.pop(next(iter(cache)))
 
-        r = func(*args, **kwargs)
-
-        cache[key] = r
-
+        cache[key] = r = func(*args, **kwargs)
         return r
 
     return wrapper
